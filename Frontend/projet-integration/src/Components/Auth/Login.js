@@ -15,17 +15,15 @@ function Login() {
       <div className="signup">
         <form>
           <label htmlFor="chk" aria-hidden="true">
-            Sign up
+            Sign in
           </label>
           <input type="email" name="email" placeholder="Email" required="" />
-         
           <input type="password" name="pswd" placeholder="Password" required="" />
-          <button>Sign up</button>
+          <button>Confirm</button>
         </form>
       </div>
     </div>
   </>
-  
   )
 }
 
