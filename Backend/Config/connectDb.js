@@ -10,5 +10,4 @@ connectDb = async () =>  {
     }
 }
 
-
 module.exports = connectDb
