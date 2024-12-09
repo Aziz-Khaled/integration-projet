@@ -7,7 +7,7 @@ const authRoute = require ("./Routes/Route")
 require ('dotenv').config()
 
 // Import the Employe model
-const Employe = require('./Config/Models/Employe');
+const Employe = require('./Models/Employe');
 const app = express() ;
 connectDb()
 
@@ -17,16 +17,16 @@ app.use (cors())
 app.use(express.json())
 app.use('/' , authRoute)
 
-// Function to create a default user
+
 const createDefaultUser = async () => {
     try {
-        // Check if any users exist
+    
         const userExists = await Employe.findOne({ email: 'admin@example.com' });
         if (!userExists) {
-            // Hash the password
+            
             const hashedPassword = await bcrypt.hash('defaultPassword123', 10);
 
-            // Create a new user
+            
             const defaultUser = new Employe({
                 email: 'admin@example.com',
                 password: hashedPassword,
