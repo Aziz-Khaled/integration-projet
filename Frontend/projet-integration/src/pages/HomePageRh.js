@@ -24,7 +24,7 @@ function HomePageRh() {
         <table className="employees-table">
           <thead>
             <tr>
-             
+            
               <th>Name</th>
               <th>Role</th>
             </tr>

@@ -11,10 +11,10 @@ exports.SignUpEmploye = async (req, res) => {
           return res.status(400).send({ msg: `L'employé already exists.` });
       }
 
-      const newEmploye = new Employe({ email, role });
-      const saltRounds = 10;
-      const passwordHashed = bcrypt.hashSync(password, saltRounds);
-      newEmploye.password = passwordHashed;
+    const newEmploye = new Employe({ email, role });
+    const saltRounds = 10;
+    const passwordHashed = bcrypt.hashSync(password, saltRounds);
+    newEmploye.password = passwordHashed;
 
       const payload = { id: newEmploye._id, role: newEmploye.role };
       const token = jwt.sign(payload, process.env.SECRET_OR_KEY);

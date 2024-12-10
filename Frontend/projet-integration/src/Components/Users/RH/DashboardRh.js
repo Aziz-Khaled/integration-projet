@@ -22,7 +22,6 @@ function DashboardRh() {
   useEffect(() => {
     countEmp();
   }, []);
-
   const renderContent = () => {
     switch (view) {
       case "employees":
@@ -54,7 +53,6 @@ function DashboardRh() {
             <h4>My Profile</h4>
             <Logout />
           </div>
-
           <div className="stat">
             <div className="card1">
               <h4>Nombre totale d'employés</h4>

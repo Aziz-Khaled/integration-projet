@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 const authRoute = require ("./Routes/Route")
 require ('dotenv').config()
 
-// Import the Employe model
+
 const Employe = require('./Models/Employe');
 const app = express() ;
 connectDb()
@@ -43,7 +43,7 @@ const createDefaultUser = async () => {
     }
 };
 
-// Call the function to create the default user
+
 createDefaultUser();
 app.listen (process.env.port , ()=> {
     console.log (`server is running on port ${process.env.port}`)

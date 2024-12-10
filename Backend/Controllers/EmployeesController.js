@@ -53,7 +53,6 @@ exports.addEmployee = async (req, res) => {
       return res.status(400).send({ msg: "Employee with this email already exists." });
     }
 
-   
     const generatedPassword = Math.random().toString(36).slice(-8);
 
     
@@ -88,7 +87,7 @@ exports.addEmployee = async (req, res) => {
 
     await transporter.sendMail(mailOptions);
 
-    // Respond with success
+    
     return res.status(201).send({
       msg: `Employee added successfully. Password sent to ${email}.`,
     });
@@ -97,3 +96,47 @@ exports.addEmployee = async (req, res) => {
     return res.status(500).send({ msg: "Internal server error", error: error.message });
   }
 };
+
+exports.updateEmployee = async (req, res) => {
+  const { id } = req.params;
+  const { email, role } = req.body;
+  try {
+    const employee = await Employe.findById(id);
+
+    if (!employee) {
+      return res.status(400).send({ msg: "Employee not found" });
+    }
+
+    if (email) employee.email = email;  
+    if (role) employee.role = role;    
+
+    const updatedEmployee = await employee.save(); 
+    return res.status(200).send({
+      msg: "Employee updated successfully",
+      updatedEmployee
+    });
+  } catch (error) {
+    console.error("Error updating employee:", error);
+    return res.status(500).send({ msg: "Internal server error", error: error.message });
+  }
+};
+
+
+exports.deleteEmployee = async (req ,res )=> {
+  const {id} = req.params
+  try {
+    const EmployeeExistOrNot = await Employe.findById (id)
+
+    if (!EmployeeExistOrNot) {
+      return res.status(400).send({msg : "Employee"})
+    }
+
+
+    await Employe.findByIdAndDelete(id);
+    return res.status(200).send({ msg: "Employee deleted successfully." });
+    
+  } catch (error) {
+    return res.status(500).send({ msg: "Internal server error", error: error.message})
+
+  }
+}
