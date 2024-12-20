@@ -11,6 +11,7 @@ exports.SignUpEmploye = async (req, res) => {
           return res.status(400).send({ msg: `L'employé already exists.` });
       }
 
+    
     const newEmploye = new Employe({ email, role });
     const saltRounds = 10;
     const passwordHashed = bcrypt.hashSync(password, saltRounds);

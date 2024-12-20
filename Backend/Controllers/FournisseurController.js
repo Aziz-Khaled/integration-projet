@@ -2,7 +2,6 @@ const Fournisseur = require("../Models/Fournisseur");
 
 exports.addFournisseur = async (req, res) => {
     const { nom, prenom, email, phoneNumber, dd_contrat, df_contrat } = req.body;
-
     try {
         const findFournisseur = await Fournisseur.findOne({ email });
         if (findFournisseur) {

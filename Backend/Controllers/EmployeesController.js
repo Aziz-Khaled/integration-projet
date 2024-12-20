@@ -47,29 +47,19 @@ exports.addEmployee = async (req, res) => {
       return res.status(400).send({ msg: "Email and role are required." });
     }
 
-    
     const existingEmployee = await Employe.findOne({ email });
     if (existingEmployee) {
       return res.status(400).send({ msg: "Employee with this email already exists." });
     }
-
     const generatedPassword = Math.random().toString(36).slice(-8);
-
-    
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(generatedPassword, saltRounds);
-
-    
     const newEmployee = new Employe({
       email,
       password: hashedPassword,
       role,
     });
-
-    
     await newEmployee.save();
-
-    
     const transporter = nodemailer.createTransport({
       service: 'gmail', 
       auth: {
@@ -77,7 +67,6 @@ exports.addEmployee = async (req, res) => {
         pass: process.env.EMAIL_PASSWORD, 
       },
     });
-
     const mailOptions = {
       from: process.env.EMAIL,
       to: email,
@@ -86,8 +75,6 @@ exports.addEmployee = async (req, res) => {
     };
 
     await transporter.sendMail(mailOptions);
-
-    
     return res.status(201).send({
       msg: `Employee added successfully. Password sent to ${email}.`,
     });
